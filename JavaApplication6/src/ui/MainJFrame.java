@@ -237,6 +237,7 @@ public class MainJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a gender.", "Validation Error", JOptionPane.ERROR_MESSAGE);
         }
         String gender = genderGroup.getSelection().getActionCommand();
+      
         boolean isEmailValid = false;
         try{
             String email = emailField.getText();
@@ -244,15 +245,15 @@ public class MainJFrame extends javax.swing.JFrame {
             Pattern pattern = Pattern.compile(emailRegex);
             Matcher matcher = pattern.matcher(email);
               if (matcher.matches()) {
-        // Email is valid
+        
          isEmailValid = true;
     } else {
-        // Email is not valid, show an error message
+        
         throw new IllegalArgumentException("Invalid email format");
     }} catch (IllegalArgumentException e) {
     JOptionPane.showMessageDialog(this, "Enter a valid email", "Validation Error", JOptionPane.ERROR_MESSAGE);
-        }
-   String temail = emailField.getText();
+        return;}
+     String temail = emailField.getText();
         System.out.println();
         JOptionPane.showMessageDialog(this, "Name: " + name + "\n" +
                  "Age: " + age + "\n" +
