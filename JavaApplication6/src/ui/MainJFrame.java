@@ -4,6 +4,8 @@
  */
 package ui;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,6 +44,8 @@ public class MainJFrame extends javax.swing.JFrame {
         typeDropdown = new javax.swing.JComboBox<>();
         typeLabel = new javax.swing.JLabel();
         submitButton = new javax.swing.JButton();
+        emailLabel = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(214, 214, 25));
@@ -104,6 +108,14 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        emailLabel.setText("E-mail");
+
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -121,7 +133,8 @@ public class MainJFrame extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(typeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(genderLabel))
+                                    .addComponent(genderLabel)
+                                    .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(1, 1, 1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +146,8 @@ public class MainJFrame extends javax.swing.JFrame {
                                 .addComponent(maleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(femaleButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nondiscloseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(nondiscloseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,9 +183,13 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(typeDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(typeLabel))
-                .addGap(61, 61, 61)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailLabel)
+                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addComponent(submitButton)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,13 +209,59 @@ public class MainJFrame extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
         String name= nameField.getText();
+         if (!name.matches("^[a-zA-Z\\s]+$") || name.isEmpty() || name.length() > 50) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid name.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return; 
+   }
         String age = ageField.getText();
-        String type= typeDropdown.getSelectedItem().toString();
-        String gender= genderGroup.getSelection().getActionCommand();
+           int tage = -1;
+         try {
+        tage = Integer.parseInt(age);
+        if (tage < 1 || tage > 150) {
+            throw new NumberFormatException(); 
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid age (1-120).", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return; 
+    }
+         try{
+        String ttype= typeDropdown.getSelectedItem().toString();
+         }catch (Exception ty) {
+             JOptionPane.showMessageDialog(this, "Please select a Client Type (Guest or Customer).", "Validation Error", JOptionPane.ERROR_MESSAGE);
+             }
+         String type= typeDropdown.getSelectedItem().toString();
+             
+        try{
+        String tgender = genderGroup.getSelection().getActionCommand();
+        }catch(Exception x){
+            JOptionPane.showMessageDialog(this, "Please select a gender.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        String gender = genderGroup.getSelection().getActionCommand();
+        boolean isEmailValid = false;
+        try{
+            String email = emailField.getText();
+             String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+            Pattern pattern = Pattern.compile(emailRegex);
+            Matcher matcher = pattern.matcher(email);
+              if (matcher.matches()) {
+        // Email is valid
+         isEmailValid = true;
+    } else {
+        // Email is not valid, show an error message
+        throw new IllegalArgumentException("Invalid email format");
+    }} catch (IllegalArgumentException e) {
+    JOptionPane.showMessageDialog(this, "Enter a valid email", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+   String temail = emailField.getText();
         System.out.println();
-        JOptionPane.showMessageDialog(this, name+" "+age+" "+gender+" "+type, "User Information", HEIGHT);
+        JOptionPane.showMessageDialog(this, "Name: " + name + "\n" +
+                 "Age: " + age + "\n" +
+                 "Gender: " + gender + "\n" +
+                 "Type: " + type + "\n" +
+                 "Email: " + temail, "User Information", HEIGHT);
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    
     private void maleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_maleButtonActionPerformed
@@ -213,6 +277,10 @@ public class MainJFrame extends javax.swing.JFrame {
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +320,8 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ageField;
     private javax.swing.JLabel ageLabel;
+    private javax.swing.JTextField emailField;
+    private javax.swing.JLabel emailLabel;
     private javax.swing.JRadioButton femaleButton;
     private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel genderLabel;
