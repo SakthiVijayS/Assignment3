@@ -33,10 +33,10 @@ public class MainJFrame extends javax.swing.JFrame {
         genderGroup = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
-        nameLabel = new javax.swing.JLabel();
+        fnameLabel = new javax.swing.JLabel();
         ageLabel = new javax.swing.JLabel();
         genderLabel = new javax.swing.JLabel();
-        nameField = new javax.swing.JTextField();
+        fnameField = new javax.swing.JTextField();
         ageField = new javax.swing.JTextField();
         maleButton = new javax.swing.JRadioButton();
         femaleButton = new javax.swing.JRadioButton();
@@ -46,6 +46,8 @@ public class MainJFrame extends javax.swing.JFrame {
         submitButton = new javax.swing.JButton();
         emailLabel = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
+        lnameLabel = new javax.swing.JLabel();
+        lnameField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(214, 214, 25));
@@ -56,16 +58,16 @@ public class MainJFrame extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("User Form");
 
-        nameLabel.setText("Name");
+        fnameLabel.setText("First Name");
 
         ageLabel.setText("Age");
 
         genderLabel.setText("Gender");
         genderLabel.setToolTipText("");
 
-        nameField.addActionListener(new java.awt.event.ActionListener() {
+        fnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
+                fnameFieldActionPerformed(evt);
             }
         });
 
@@ -116,6 +118,8 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        lnameLabel.setText("Last Name");
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -123,25 +127,21 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
-                                .addGap(186, 186, 186)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(ageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(typeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(genderLabel)
-                                    .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(1, 1, 1)))
+                        .addGap(154, 154, 154)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(ageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lnameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                            .addComponent(emailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(typeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(genderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fnameLabel, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(typeDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ageField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(fnameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ageField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lnameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(maleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -163,11 +163,15 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(titleLabel)
-                .addGap(58, 58, 58)
+                .addGap(38, 38, 38)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(fnameLabel)
+                    .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lnameLabel)
+                    .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ageLabel)
                     .addComponent(ageField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,7 +193,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(submitButton)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,9 +212,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-        String name= nameField.getText();
-         if (!name.matches("^[a-zA-Z\\s]+$") || name.isEmpty() || name.length() > 50) {
-        JOptionPane.showMessageDialog(this, "Please enter a valid name.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        String fname= fnameField.getText();
+         if (!fname.matches("^[a-zA-Z\\s]+$") || fname.isEmpty() || fname.length() > 50) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid First name( no numbers or special characters).", "Validation Error", JOptionPane.ERROR_MESSAGE);
+        return; 
+   }
+          String lname= lnameField.getText();
+         if (!lname.matches("^[a-zA-Z\\s]+$") || lname.isEmpty() || lname.length() > 50) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid Last name ( no numbers or special characters).", "Validation Error", JOptionPane.ERROR_MESSAGE);
         return; 
    }
         String age = ageField.getText();
@@ -255,7 +264,8 @@ public class MainJFrame extends javax.swing.JFrame {
         return;}
      String temail = emailField.getText();
         System.out.println();
-        JOptionPane.showMessageDialog(this, "Name: " + name + "\n" +
+        JOptionPane.showMessageDialog(this, "First Name: " + fname + "\n" +
+                 "Last Name: " + lname + "\n" +
                  "Age: " + age + "\n" +
                  "Gender: " + gender + "\n" +
                  "Type: " + type + "\n" +
@@ -275,9 +285,9 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nondiscloseButtonActionPerformed
 
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
+    private void fnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldActionPerformed
+    }//GEN-LAST:event_fnameFieldActionPerformed
 
     private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
         // TODO add your handling code here:
@@ -324,12 +334,14 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JRadioButton femaleButton;
+    private javax.swing.JTextField fnameField;
+    private javax.swing.JLabel fnameLabel;
     private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel genderLabel;
+    private javax.swing.JTextField lnameField;
+    private javax.swing.JLabel lnameLabel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JRadioButton maleButton;
-    private javax.swing.JTextField nameField;
-    private javax.swing.JLabel nameLabel;
     private javax.swing.JRadioButton nondiscloseButton;
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel titleLabel;
